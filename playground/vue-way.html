@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        var div = document.querySelector('#app');
+        //객체 선언
+        var viewModel = {};
+        
+        //자바스크립트 즉시 실행 함수
+        //기본적으로 init과 render가 app로직에 노출되지 않게 또 다른 scope에 넣어줌
+        //일반적인 오픈소스 라이브러리들이 이런식으로 유효범위 관리
+        (function () {
+            function init() {
+                //객체의 동작을 재정의하는 API
+                //(대상 객체, 객체의 속성, { 정의할 내용 })
+                Object.defineProperty(viewModel, 'str', {
+                    //속성에 접근했을 때의 동작을 정의
+                    //console.log(viewModel.str)처럼 콘솔로 viewModel의 str에 접근했을 때의 동작 설정
+                    get: function () {
+                        console.log('접근');
+                    },
+                    //속성에 값을 할당했을 때의 동작을 정의
+                    set: function (newValue) {
+                        console.log('할당', newValue);
+                        render(newValue);
+                    }
+                });
+            }
+            function render(value) {
+                //값을 바꿀 때마다 화면에 바로 반영됨
+                //Reactivity: Vue의 핵심!
+                //데이터의 변화를 라이브러리에서 감지해서 자동으로 화면에 적용
+                div.innerHTML = value; //이 부분이 Data Binding
+            }
+            init();
+        })();
+    </script>
+</body>
+
+</html>
