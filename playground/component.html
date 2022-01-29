@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 뷰의 인스턴스 영역
+        컴포넌트 태그를 작성하면 컴포넌트의 내용이 반영됨 -->
+        <app-header></app-header>
+        <app-footer></app-footer>
+    </div>
+    
+    <div id="app2">
+        <app-header></app-header>
+        <app-footer></app-footer> <!-- app1의 지역 컴포넌트이므로 사용 불가 -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        //전역 컴포넌트 등록
+        //Vue.component('컴포넌트 이름', 컴프넌트 내용);
+        Vue.component('app-header', {
+            //template: 컴포넌트가 표현되는 마크업, 스타일 등
+            template: '<h1>Header</h1>'
+        });
+
+        //인스턴스를 생성하면 기본적으로 root 컴포넌트가 됨
+        new Vue({
+            el: '#app',
+            //지역 컴포넌트 등록
+            //'컴포넌트 이름': 컴포넌트 내용
+            components: { //객체 리터럴(기호)
+                'app-footer': {
+                    template: '<footer>Footer</footer>'
+                }
+            }
+        });
+        new Vue({
+            el: '#app2',
+        })
+    </script>
+</body>
+</html>
