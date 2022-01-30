@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- v-bind: props 속성 이름="상위 컴포넌트의 데이터 이름" -->
+        <app-header v-bind:propsdata="message"></app-header>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var appHeader = {
+            template: '<h1>Header</h1>',
+            props: ['propsdata'] 
+        }
+        new Vue({
+            el: '#app',
+            components: {
+                'app-header': appHeader
+            },
+            //root컴포넌트에 존재
+            data: {
+                //props를 통해 app-header로 내릴 수 있음
+                message: 'Hi'
+            }
+        })
+    </script>
+
+</body>
+</html>
