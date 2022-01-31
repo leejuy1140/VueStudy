@@ -7,8 +7,9 @@
 </head>
 <body>
     <div id="app">
-        <!-- v-bind: props 속성 이름="상위 컴포넌트의 데이터 이름" -->
+        <!-- v-bind:props 속성 이름="상위 컴포넌트의 데이터 이름" -->
         <app-header v-bind:propsdata="message"></app-header>
+        <app-content v-bind:propsdata="num"></app-content>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -17,15 +18,22 @@
             template: '<h1>Header</h1>',
             props: ['propsdata'] 
         }
+        var appContent = {
+            //{{}}는 data binding 문법으로 props 데이터가 반영됨
+            template: '<div>{{ propsdata }}</div>',
+            props: ['propsdata']
+        }
         new Vue({
             el: '#app',
             components: {
-                'app-header': appHeader
+                'app-header': appHeader,
+                'app-content': appContent
             },
             //root컴포넌트에 존재
             data: {
                 //props를 통해 app-header로 내릴 수 있음
-                message: 'Hi'
+                message: 'Hi',
+                num: 10
             }
         })
     </script>
