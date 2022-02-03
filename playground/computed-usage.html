@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .warning {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 
+            class명은 warning이 됨
+            뒤의 조건에 따라 warning이 추가되거나 추가되지 않거나 함
+            isError가 true일때는 warning이 들어가고(빨간색), false일때는 안들어감
+         -->
+        <p v-bind:class="{ warning:isError }">Hello</p>
+        <p v-bind:class="errorTextColor">Hello</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                isError: true
+            },
+            computed: {
+                errorTextColor: function () {
+                    return this.isError ? 'warning' : null;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
