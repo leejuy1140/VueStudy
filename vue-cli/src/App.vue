@@ -1,33 +1,29 @@
 <template>
   <div>
     <!-- App이라는 컴포넌트에서 AppHeader컴포넌트로 propsdata로 str을 보냄 -->
-    <app-header 
-      v-bind:propsdata="str" 
-      v-on:renew="renewStr"></app-header>
+    <app-header v-bind:propsdata="str" v-on:renew="renewStr"></app-header>
   </div>
 </template>
 
 <script>
-import AppHeader from './components/AppHeader.vue'
+import AppHeader from "./components/AppHeader.vue";
 
 export default {
-  data : function() {
+  data: function () {
     return {
       //이걸 AppHeader 컴포넌트로 Props 할 것!
-      str: 'Header'
-    }
+      str: "Header",
+    };
   },
   components: {
-    'app-header': AppHeader
+    "app-header": AppHeader,
   },
   methods: {
-    renewStr: function() {
-      this.str = this.str + '1';
-    }
-  }
-}
+    renewStr: function () {
+      this.str = this.str + "1";
+    },
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
