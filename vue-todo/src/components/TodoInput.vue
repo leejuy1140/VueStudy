@@ -1,7 +1,10 @@
 <template>
-  <div>
-      <input type="text" v-model="newTodoItem">
-      <button v-on:click="addTodo">add</button>
+  <!-- shadow는 App.vue에 정의되어 있음 -->
+  <div class="inputBox shadow">
+      <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo">
+      <span class="addContainer" v-on:click="addTodo">
+          <i class="fa-solid fa-plus"></i>
+      </span>
   </div>
 </template>
 
@@ -9,18 +12,51 @@
 export default {
     data: function() {
         return {
-            newTodoItem: "" //새롭게 입력되는 text
+            newTodoItem: ""
         }
     },
     methods: {
         addTodo: function() {
-            localStorage.setItem(this.newTodoItem, this.newTodoItem);
+            if (this.newTodoItem !== '') {
+                //text 체크 여부 + text 값
+                var obj = {completed: false, item: this.newTodoItem};
+                //자바스크립트 객체를 string으로 변환해주는 객체
+                //로컬스토리지 특성 상 문자열로 넣어야 함
+                localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+                this.clearInput();
+            }
+        },
+        clearInput: function() {
             this.newTodoItem = "";
         }
     }
 }
 </script>
 
-<style>
-
+<style scoped>
+    input:focus {
+        outline: none;
+    }
+    .inputBox {
+        background: white;
+        height: 50px;
+        line-height: 50px;
+        border-radius: 5px;
+    }
+    /* 모든 input 태그 중에 부모가 inputBox 클래스인 경우 */
+    .inputBox input {
+        border-style: none;
+        font-size: 0.9rem;
+    }
+    .addContainer {
+        float: right;
+        background: linear-gradient(to right, #6478FB, #8764FB);
+        display: block;
+        width: 3rem;
+        border-radius: 0 5px 5px 0;
+    }
+    .addBtn {
+        color: white;
+        vertical-align: middle;
+    }
 </style>
