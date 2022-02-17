@@ -3,8 +3,9 @@
     <ul>
       <!-- todoItems를 todoItem에 담아서 중복되지 않는 한(Key) 담겠다 -->
       <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
-        <i class="checkBtn fa-solid fa-check" v-bind:class="{checkBtnCompleted:todoItem.completed}"    
-           v-on:click="toggleComplete(todoItem)"></i>
+        <i class="checkBtn fa-solid fa-check" 
+           v-bind:class="{checkBtnCompleted:todoItem.completed}"    
+           v-on:click="toggleComplete(todoItem, index)"></i>
         <span v-bind:class="{textCompleted:todoItem.completed}">
           {{ todoItem.item }}
         </span>
@@ -18,17 +19,13 @@
 
 <script>
 export default {
-  propsdata: ['propsdata'],
+  props: ['propsdata'], //할 일 목록(todoItems)
   methods: {
     removeTodo: function(todoItem, index) {
-      localStorage.removeItem(todoItem.item);
-      this.todoItems.splice(index, 1);
+      this.$emit('removeItem', todoItem, index);
     },
     toggleComplete: function(todoItem) {
-      todoItem.completed = !todoItem.completed;
-      //로컬저장소는 삭제, 추가 밖에 없어서 지우고 다시 추가해야함
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+      this.$emit('toggleItem', todoItem);
     }
   }
 }

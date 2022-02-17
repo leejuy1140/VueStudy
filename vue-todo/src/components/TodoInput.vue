@@ -18,11 +18,7 @@ export default {
     methods: {
         addTodo: function() {
             if (this.newTodoItem !== '') {
-                //text 체크 여부 + text 값
-                var obj = {completed: false, item: this.newTodoItem};
-                //자바스크립트 객체를 string으로 변환해주는 객체
-                //로컬스토리지 특성 상 문자열로 넣어야 함
-                localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+                this.$emit('addTodoItem', this.newTodoItem);
                 this.clearInput();
             }
         },
