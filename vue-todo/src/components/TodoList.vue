@@ -75,7 +75,7 @@ li {
 .list-enter-active,
 .list-leave-active {
   /* opcity 0->1 가는 시간이 1초 */
-  transition: all 1s ease;
+  transition: all 0.5s ease;
 }
 .list-enter,
 .list-leave-to {
