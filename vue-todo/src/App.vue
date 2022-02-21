@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     addOneItem: function(todoItem) {
-      var obj = {completed: false, item: todoItem};
+      const obj = {completed: false, item: todoItem};
       localStorage.setItem(todoItem, JSON.stringify(obj));
       this.todoItems.push(obj);
     },
@@ -43,7 +43,7 @@ export default {
   },
   created: function () {
     if (localStorage.length > 0) {
-      for (var i = 0; i < localStorage.length; i++) {
+      for (let i = 0; i < localStorage.length; i++) {
         if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
           //문자열로 로컬저장소에 저장한 값을 풀어줌
           this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
