@@ -26,10 +26,10 @@
 export default {
   props: ["propsdata"], //할 일 목록(todoItems)
   methods: {
-    removeTodo: function (todoItem, index) {
+    removeTodo(todoItem, index) {
       this.$emit("removeItem", todoItem, index);
     },
-    toggleComplete: function (todoItem) {
+    toggleComplete(todoItem) {
       this.$emit("toggleItem", todoItem);
     },
   },
