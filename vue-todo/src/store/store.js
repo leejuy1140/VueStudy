@@ -1,13 +1,25 @@
-import Vue from 'vue'  
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 
-//Vue의 플러그인 기능
-//Vue를 사용하는 모든 영역에 특정 기능을 전역으로 추가하고 싶을 때
 Vue.use(Vuex);
 
-//store는 밖에서 사용할 수 있게 export 설정
-export const store = new Vuex.Store({
-    state: {
-        headerText: 'TODO it!'
+//로컬 스토리지 관련 기능들을 따로 정리
+const storage = {
+  fetch() {
+    const arr = [];
+    if (localStorage.length > 0) {
+      for (let i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
+          arr.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
+        }
+      }
     }
+    return arr;
+  },
+};
+
+export const store = new Vuex.Store({
+  state: {
+    todoItems: storage.fetch()
+  }
 });
