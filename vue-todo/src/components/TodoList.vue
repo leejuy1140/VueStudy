@@ -24,13 +24,12 @@
 
 <script>
 export default {
-  props: ["propsdata"], //할 일 목록(todoItems)
   methods: {
     removeTodo(todoItem, index) {
-      this.$emit("removeItem", todoItem, index);
+      this.$store.commit('removeOneItem', {todoItem, index});
     },
-    toggleComplete(todoItem) {
-      this.$emit("toggleItem", todoItem);
+    toggleComplete(todoItem, index) {
+      this.$store.commit('toggleOneItem', {todoItem, index});
     },
   },
 };
